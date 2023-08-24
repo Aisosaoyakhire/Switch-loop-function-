@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Simple ATM</title>
+        <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color:rgb(16, 16, 111);
+            color:white;
+
+            
+        }
+        img {
+            align-self: center;
+         }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 15px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h2>Welcome to Access Bank ATM</h2>
+            <button onclick="startATM()">Start ATM</button>
+            <div id="output"></div>
+        </div>
+        <img src = "accesslogo.jpg">
+        <script>
+        function startATM() {
+            let name = prompt('Enter Your Name');
+            alert(`Welcome ${name}.\nPlease Note That The Default Pin Is 1234`);
+
+            let pin = +prompt('Enter Your Pin');
+            let balance = 10000;
+
+            if (pin === 1234) {
+                let output = document.getElementById('output');
+                output.innerHTML = `
+                    <h3>Hello, ${name}</h3>
+                    <button onclick="withdrawal(${balance}, '${name}')">Withdrawal</button>
+                    <button onclick="checkBalance(${balance}, '${name}')">Check Balance</button>
+                    <button onclick="transferFunds(${balance}, '${name}')">Transfer Fund</button>
+                `;
+            } else {
+                alert('Incorrect Pin');
+            }
+        }
+
+
+
+               
+                
+                function withdrawal(balance, name) {
+                    let wtdAmount = +prompt('Enter Amount to Withdraw');
+                    if (balance >= wtdAmount) {
+                        balance -= wtdAmount;
+                        alert(`Dear ${name}, ${wtdAmount} has been withdrawn.\nYour balance is ${balance}`);
+                    } else {
+                        alert(`Dear ${name}, your account balance is too low.\nYour balance is ${balance}`);
+                    }
+                }
+
+                function checkBalance(balance, name) {
+                    alert(`Dear ${name}, your balance is ${balance}`);
+                }
+
+                function transferFunds(balance, name) {
+                    let transType = +prompt('1. Transfer to same bank\n2. Transfer to other bank');
+                    if (transType === 1) {
+                        let accountNumber = +prompt('Enter the account Number');
+                        alert(`Account Name: Oyakhire Aisosa\nAccount Number: ${accountNumber}`);
+                        let transferAmount = +prompt('Amount to transfer');
+                        if (balance >= transferAmount) {
+                            alert(`Dear ${name}, ${transferAmount} has been sent to ${accountNumber}`);
+                        } else {
+                            alert(`Account balance is too low. Your balance is ${balance}`);
+                        }
+                    } else if (transType === 2) {
+                        let accountNumber = +prompt('Enter the account Number');
+                        let bankName = prompt('Enter Bank name');
+                        alert(`Account Name: Oyakhire Aisosa\nAccount Number: ${accountNumber}\nBank Name: ${bankName}`);
+                        let transferAmount = +prompt('Amount to transfer');
+                        if (balance >= transferAmount) {
+                            alert(`Dear ${name}, ${transferAmount} has been sent to ${accountNumber} with account name Oyakhire Aisosa domicile with ${bankName}`);
+                        }
+                    }
+                }
+        </script>
+    </body>
+</html>
